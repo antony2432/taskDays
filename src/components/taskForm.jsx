@@ -41,6 +41,7 @@ export default function TaskForm() {
           className="form-control"
           onChange={onChangeValue}
           value={dataForm.nameTask}
+          required
         />
       </div>
       <div className="mb-3 form-group">
@@ -53,6 +54,7 @@ export default function TaskForm() {
           className="form-control"
           onChange={onChangeValue}
           value={dataForm.assigned}
+          required
         />
       </div>
       <div className="mb-3 form-group">

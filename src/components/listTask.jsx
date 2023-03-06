@@ -26,7 +26,7 @@ export default function ListTask() {
     getTask();
   }, []);
   return (
-    <div className="mt-3 card card-body d-flex flex-column justify-content-center align-items-center" style={styleCard}>
+    <div className="mt-3 mb-3 card card-body d-flex flex-column justify-content-center align-items-center" style={styleCard}>
       <h3 className="text-center">List of Task</h3>
 
       {loading ? (
