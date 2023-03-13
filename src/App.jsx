@@ -2,7 +2,7 @@ import TaskForm from "./components/TaskForm/TaskForm";
 import ListTask from "./components/ListTask/ListTask";
 import { useState } from "react";
 import "./firebase";
-import ModalForm from "./components/Modal/modal";
+import ModalForm from "./components/Modal/ModalForm";
 function App() {
   const [show, setShow] = useState(false);
   const initialTaskModal = {
