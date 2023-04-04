@@ -1,7 +1,10 @@
 import { Badge, ListGroupItem } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { onModal } from "../../redux/slices/modalShow";
 
-export default function Task({ propTask, setShow, setTaskModal }) {
-  const { nameTask, assigned, description } = propTask;
+export default function Task({ propTask, setTaskModal }) {
+  const { nameTask, assigned, description } = propTask
+  const dispatch = useDispatch()
   const colorAssigned = (assigned) => {
     let color = "";
     switch (assigned) {
@@ -20,7 +23,7 @@ export default function Task({ propTask, setShow, setTaskModal }) {
     return color;
   };
   const handleClick = () => {
-    setShow(true);
+    dispatch(onModal())
     setTaskModal(propTask);
   };
   return (

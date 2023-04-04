@@ -1,31 +1,11 @@
 import Task from "../Task/Task";
-import { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import { collection, onSnapshot } from "firebase/firestore";
 import { Card, ListGroup, Spinner } from "react-bootstrap";
-
-export default function ListTask({ setShow, setTaskModal }) {
+import useFireStorn from "../../hooks/useFireStorn";
+export default function ListTask({ setTaskModal }) {
   const styleCard = {
     width: "23rem",
   };
-
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const getTask = async () => {
-    onSnapshot(collection(db, "task"), (querySnapshot) => {
-      const arr = [];
-      querySnapshot.forEach((doc) => {
-        arr.push({ ...doc.data(), id: doc.id });
-      });
-      setTasks(arr);
-      setLoading(false);
-    });
-  };
-  useEffect(() => {
-    setLoading(true);
-    getTask();
-  }, []);
+  const {tasks, loading} = useFireStorn()
   return (
     <Card
       className="mt-3 mb-3 d-flex flex-column justify-content-center align-items-center"
@@ -45,7 +25,6 @@ export default function ListTask({ setShow, setTaskModal }) {
                 <Task
                   propTask={task}
                   key={task.id}
-                  setShow={setShow}
                   setTaskModal={setTaskModal}
                 />
               ))}

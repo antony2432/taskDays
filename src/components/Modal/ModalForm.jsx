@@ -13,28 +13,34 @@ import {
 } from "react-bootstrap";
 import { db } from "../../firebase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { useSelector,useDispatch } from "react-redux";
+import {offModal} from "../../redux/slices/modalShow"
 
-export default function ModalForm({ show, setShow, taskModal, setTaskModal }) {
-  const handleClose = () => setShow(false);
-
+export default function ModalForm({ taskModal, setTaskModal }) {
+  const show = useSelector((state) =>state.modalShow.value)
+  const dispatch = useDispatch()
+  const handleClose = () => dispatch(offModal())
   const onChangeValue = (e) => {
     const { id, value } = e.target;
     setTaskModal({ ...taskModal, [id]: value });
   };
   const UpdateTask = async (e) => {
     e.preventDefault();
-    setShow(false);
-    await updateDoc(doc(db, "task", taskModal.id), taskModal);
+    try {
+      dispatch(offModal)
+      updateDoc(doc(db, "task", taskModal.id), taskModal);
+    } catch (err) {
+      console.log(err)
+    }
   };
   const deleteClick = async (e) => {
     e.preventDefault();
     try {
-      setShow(false);
-      setTimeout(async () => {
-        await deleteDoc(doc(db, "task", taskModal.id));
-      }, 500);
+      deleteDoc(doc(db, "task", taskModal.id))
     } catch (error) {
       console.log(error);
+    } finally {
+      dispatch(offModal)
     }
   };
   return (

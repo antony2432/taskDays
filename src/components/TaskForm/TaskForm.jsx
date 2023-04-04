@@ -8,10 +8,10 @@ import {
   FormGroup,
   FormLabel,
 } from "react-bootstrap";
-import { db } from "../../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import useFireStorn from "../../hooks/useFireStorn";
 
 export default function TaskForm() {
+  const { postTask } = useFireStorn();
   const initialValue = {
     nameTask: "",
     assigned: "",
@@ -28,15 +28,11 @@ export default function TaskForm() {
     width: "23rem",
   };
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
-    try {
-      const temporalData = dataForm;
-      setDataForm(initialValue);
-      const docRef = await addDoc(collection(db, "task"), temporalData);
-    } catch (error) {
-      console.error(error);
-    }
+    const temporalData = dataForm;
+    setDataForm(initialValue);
+    postTask(temporalData);
   };
   return (
     <Card style={styleCard}>
