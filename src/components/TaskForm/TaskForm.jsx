@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Button,
   Card,
@@ -8,32 +7,11 @@ import {
   FormGroup,
   FormLabel,
 } from "react-bootstrap";
-import useFireStorn from "../../hooks/useFireStorn";
+import UtilitisTaskForm from "./UtilitisTaskForm";
 
 export default function TaskForm() {
-  const { postTask } = useFireStorn();
-  const initialValue = {
-    nameTask: "",
-    assigned: "",
-    description: "",
-  };
-  const [dataForm, setDataForm] = useState(initialValue);
-
-  const onChangeValue = (e) => {
-    const { id, value } = e.target;
-    setDataForm({ ...dataForm, [id]: value });
-  };
-
-  const styleCard = {
-    width: "23rem",
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    const temporalData = dataForm;
-    setDataForm(initialValue);
-    postTask(temporalData);
-  };
+  const { dataForm, onChangeValue, styleCard, handleClick } =
+    UtilitisTaskForm();
   return (
     <Card style={styleCard}>
       <Card.Body>

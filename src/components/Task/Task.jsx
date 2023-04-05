@@ -1,34 +1,12 @@
 import { Badge, ListGroupItem } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { onModal } from "../../redux/slices/modalShow";
+import UtilitisTask from "./UtilitisTask";
 
-export default function Task({ propTask, setTaskModal }) {
-  const { nameTask, assigned, description } = propTask
-  const dispatch = useDispatch()
-  const colorAssigned = (assigned) => {
-    let color = "";
-    switch (assigned) {
-      case "Antony":
-        color = "warning";
-        break;
-      case "Valeria":
-        color = "primary";
-        break;
-      case "Luis":
-        color = "success";
-        break;
-      default:
-        color = "secondary";
-    }
-    return color;
-  };
-  const handleClick = () => {
-    dispatch(onModal())
-    setTaskModal(propTask);
-  };
+export default function Task({ propTask }) {
+  const { nameTask, assigned, description } = propTask;
+  const { colorAssigned, handleClick } = UtilitisTask();
   return (
     <ListGroupItem
-      onClick={handleClick}
+      onClick={() => handleClick(propTask)}
       className="d-flex justify-content-between align-items-start"
       as="li"
     >

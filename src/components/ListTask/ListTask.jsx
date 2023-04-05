@@ -1,11 +1,11 @@
 import Task from "../Task/Task";
 import { Card, ListGroup, Spinner } from "react-bootstrap";
 import useFireStorn from "../../hooks/useFireStorn";
-export default function ListTask({ setTaskModal }) {
+export default function ListTask() {
   const styleCard = {
     width: "23rem",
   };
-  const {tasks, loading} = useFireStorn()
+  const { tasks, loading } = useFireStorn();
   return (
     <Card
       className="mt-3 mb-3 d-flex flex-column justify-content-center align-items-center"
@@ -21,13 +21,7 @@ export default function ListTask({ setTaskModal }) {
         <ListGroup as="ul" className="mt-3 mb-3">
           {tasks.length == 0
             ? "Crea tu primera tarea"
-            : tasks.map((task) => (
-                <Task
-                  propTask={task}
-                  key={task.id}
-                  setTaskModal={setTaskModal}
-                />
-              ))}
+            : tasks.map((task) => <Task propTask={task} key={task.id} />)}
         </ListGroup>
       )}
     </Card>

@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   tasks: [],
-  taskTarget: {},
+  taskTarget: {
+    assigned: "",
+    nameTask: "",
+    description: "",
+    id: "",
+  },
   length: 0,
 };
 
@@ -18,6 +23,9 @@ export const tasksSlice = createSlice({
         (task) => task.id === action.payload
       );
     },
+    setTaskTarget: (state, action) => {
+     state.taskTarget = action.payload
+    }
   },
 });
 

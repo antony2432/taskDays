@@ -1,8 +1,15 @@
 import { db } from "../firebase";
-import { collection, onSnapshot, addDoc } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setTask, setTaskTarget } from "../redux/slices/tasksSlice";
+import { setTask } from "../redux/slices/tasksSlice";
 const useFireStorn = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -26,6 +33,21 @@ const useFireStorn = () => {
     }
   };
 
+  const updateTask = async (task) => {
+    try {
+      updateDoc(doc(db, "task", task.id), task);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const deleteTask = async (id) => {
+    try {
+      deleteDoc(doc(db, "task", id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
     setLoading(true);
     getTask();
@@ -35,6 +57,8 @@ const useFireStorn = () => {
     tasks,
     loading,
     postTask,
+    updateTask,
+    deleteTask,
   };
 };
 export default useFireStorn;
