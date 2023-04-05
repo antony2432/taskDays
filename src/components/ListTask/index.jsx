@@ -1,4 +1,4 @@
-import Task from "../Task/Task";
+import Task from "../Task";
 import { Card, ListGroup, Spinner } from "react-bootstrap";
 import useFireStorn from "../../hooks/useFireStorn";
 export default function ListTask() {

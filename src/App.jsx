@@ -1,7 +1,7 @@
-import TaskForm from "./components/TaskForm/TaskForm";
-import ListTask from "./components/ListTask/ListTask";
+import TaskForm from "./components/TaskForm";
+import ListTask from "./components/ListTask";
 import "./firebase";
-import ModalForm from "./components/Modal/ModalForm";
+import ModalForm from "./components/Modal";
 function App() {
   return (
     <div className="w-100  d-flex flex-column align-items-center">
